@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Cindy Chen's Insight Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/cc-style.css" rel="stylesheet">
+    <link href="../static/css/starter-template.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.fuelyourstartup.com/">Fuel Your Startups</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="http://www.fuelyourstartup.com/">Home</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="http://web.ics.purdue.edu/~chen654/" target = '_blank'>About Cindy</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+       <h3 class = 'main_title'>{{company_name}}, Next Funding Round: {{funding_round}}</h3>
+        <p class='sub_title'>Location: {{company_location}}</p>
+        <p class='sub_title'>Categories: {{company_categories}}</p>
+      <div class="row">
+        <div class="col-md-5">
+           
+            <div >
+           
+            <p class='sub_sub_title'>Potential Investors (<span class='person'>Angel Investors</span>)</p>
+            </div>
+             <table class="table table-hover">
+            <tr><th>Investors</th><th>Org. Categories or Person Title</th><th>Rank</th></tr>
+            {%for investor in investor_list%}
+            <tr><td  class='{{ investor['investor_type']}}'>{{ investor['name'] }}</td><td>{{ investor['categories']}}</td><td>{{ loop.index}}</td></tr>
+            {% endfor %}
+            </table>
+        </div>
+        
+        <div class="col-md-7">
+           
+            <p class='sub_sub_title'>See How You are Connected </p>
+            <p class='sub_sub_title'>with <span class='pi'>Potential Investors</span> in Your Close Network</p>
+            
+             <div id='d3network' class='d3network'>
+             </div>
+             
+             <table class='legend'>
+              <tr>
+                <td>
+                  <div class='legend-left'><span>Color:</span><div class='rect1'></div><span>Potential Investors in Your Network</span></div>
+                  <div class='legend-left'><span>Color:</span><div class='rect2'></div><span>Competitors</span></div>
+                  <div class='legend-left'><span>Color:</span><div class='rect3'></div><span>Other Nodes</span></div>
+                </td>
+                
+                <td>
+                  
+              <div class='legend-right'><span>Shape:</span><div class='rect1'></div><span>Organizations</span></div>
+              <div class='legend-right'><span>Shape:</span><div class='circle1'></div><span>People</span></div>
+              <div class='legend-right'><span>Size:</span><div class='circle2'></div><span>1st Degree of Network</span></div>
+              <div class='legend-right'><span>Size:</span><div class='circle3'></div><div class='rect4'></div><span>2nd or 3rd Degree of Network</span></div>
+                </td>
+                
+              </tr>
+             </table>
+             
+            
+              
+
+          
+             
+           <div id="tooltip" class="hidden">
+           <span id="entity-name"></span>
+           </div>
+            
+        </div>
+        
+    </div>
+      
+      
+      
+      
+     
+
+     
+
+
+     </div><!-- /.container -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+  
+    <script src="../static/js/bootstrap-select.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src='../static/js/d3plusjs/d3plus.js'></script>
+    <script src='../static/js/d3plusjs/topojson.js'></script>
+    <script>
+      var predicted_investors = {{ predicted_investors|tojson|safe}};
+      var network_filename = {{network_filename|tojson|safe}};
+    </script>
+    <script src="{{ url_for('static', filename='js/network.js')}}"> </script>
+    
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
