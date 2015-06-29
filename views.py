@@ -40,9 +40,13 @@ def investor_output():
   
     return render_template("output.html", predicted_investors = predicted_investors, investor_list = investor_list, network_filename = network_filename, company_name = company_origin_name, company_location=company_location, company_categories=company_categories, funding_round=funding_round)
 
-@app.route('/test')
+@app.route('/resume')
 def test_func():
-  return render_template('test.html')
+  return render_template('resume.html')
+
+@app.route('/slides')
+def slide_func():
+  return render_template('slides.html')
 
 
 
